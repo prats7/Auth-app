@@ -1,9 +1,15 @@
 const express = require('express');
 
+const expressLayouts = require('express-ejs-layouts');
+
 const app = express();
 
 //DB config
 const db = require('./config/mongoose');
+
+//EJS layouts
+app.use(expressLayouts);
+app.set('view engine','ejs');
 
 //Routes
 app.use('/',require('./routes/api/index'));
