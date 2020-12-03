@@ -4,12 +4,26 @@ const expressLayouts = require('express-ejs-layouts');
 
 const app = express();
 
+const flash = require('connect-flash');
+
+const session = require('express-session');
+
 //DB config
 const db = require('./config/mongoose');
 
 //EJS layouts
 app.use(expressLayouts);
 app.set('view engine','ejs');
+
+// Express session
+app.use(
+    session({
+      secret: 'secret',
+      resave: true,
+      saveUninitialized: true
+    })
+  );
+  
 
 //Routes
 app.use('/',require('./routes/api/index'));
