@@ -11,6 +11,23 @@ const { forwardAuthenticated } = require('../../config/auth');
 router.get('/login', forwardAuthenticated, (req, res) => res.render('login'));
 
 
+// router.get('/auth/google', passport.authenticate('google', {scope: ['profile', 'email']}));
+// router.get('/auth/google/callback', passport.authenticate('google', {failureRedirect: '/users/signin'}),(req,res) => {
+//   res.send('you reached the call back URI');
+// });
+
+
+//auth with google
+router.get('/google', passport.authenticate('google',{
+    scope:['profile','email']
+}));
+
+//callback route for google redirect to
+router.get('/google/callback',passport.authenticate('google'),(req,res) => {
+    res.send('you reached the call back URI');
+});
+
+
 // Register Page
 router.get('/register', forwardAuthenticated, (req, res) => res.render('register'));
 

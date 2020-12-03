@@ -10,6 +10,8 @@ const session = require('express-session');
 
 const passport = require('passport');
 
+const passportSetup = require('./config/passport-google-strategy');
+
 // Passport Config
 require('./config/passport')(passport);
 
