@@ -55,6 +55,6 @@ app.use(passport.session());
 app.use('/',require('./routes/api/index'));
 app.use('/users',require('./routes/api/users'));
 
-const PORT = 5000 || process.env.PORT;
+const PORT = process.env.PORT || 5000 ;
 
 app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
