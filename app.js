@@ -8,12 +8,20 @@ const flash = require('connect-flash');
 
 const session = require('express-session');
 
+const passport = require('passport');
+
+// Passport Config
+require('./config/passport')(passport);
+
 //DB config
 const db = require('./config/mongoose');
 
 //EJS layouts
 app.use(expressLayouts);
 app.set('view engine','ejs');
+
+// Express body parser
+app.use(express.urlencoded({ extended: true }));
 
 // Express session
 app.use(
@@ -35,6 +43,11 @@ app.use(function(req, res, next) {
   res.locals.error = req.flash('error');
   next();
 });
+
+// Passport middleware
+app.use(passport.initialize());
+app.use(passport.session());
+
 
 //Routes
 app.use('/',require('./routes/api/index'));
